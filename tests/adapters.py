@@ -13,9 +13,9 @@ from torch import Tensor
 def run_linear(
     d_in: int,
     d_out: int,
-    weights: Float[Tensor, " d_out d_in"],
-    in_features: Float[Tensor, " ... d_in"],
-) -> Float[Tensor, " ... d_out"]:
+    weights: Float[Tensor],
+    in_features: Float[Tensor],
+) -> Float[Tensor]:
     """
     Given the weights of a Linear layer, compute the transformation of a batched input.
 
