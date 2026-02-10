@@ -18,6 +18,12 @@ for word in words:
 
 vocab_list = [b'<|endoftext|>'] + [bytes([x]) for x in range(256)]
 
+pair_freq: Dict[Tuple[bytes, bytes], int]
+for byte_tuple in word_count:
+    for i in range(len(byte_tuple)):
+        
+
+
 
 
 
