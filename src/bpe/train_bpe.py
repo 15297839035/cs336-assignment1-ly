@@ -3,7 +3,7 @@ from src.bpe.text_chunk import find_chunk_boundaries
 PAT = r"""'(?:[sdmt]|ll|ve|re)| ?\p{L}+| ?\p{N}+| ?[^\s\p{L}\p{N}]+|\s+(?!\S)|\s+"""
 DATA_PATH = "./data"
 SPECIAL_TOCKEN = "<|endoftext|>"
-with open(f"{DATA_PATH}/TinyStoriesV2-GPT4-valid.txt") as f:
+with open(f"{DATA_PATH}/TinyStoriesV2-GPT4-train.txt") as f:
     text: str = f.read()
 
 vocab_list: list[bytes] = [b'<|endoftext|>'] + [bytes([x]) for x in range(256)]
@@ -78,18 +78,14 @@ def text_pbe(
     word_count = text_count(text)
     while (len(vocab_list) < vocab_size):
         max_pair = cal_max_pair(word_count)
-        merge(max_pair, word_count)
+        word_count = merge(max_pair, word_count)
         vocab_list.append(max_pair[0] + max_pair[1])
         merges.append(max_pair)
     
     return merges
 
-
-word_count = text_count(text)
-print(word_count)
-max_pair = cal_max_pair(word_count)
-print("maxpair", max_pair)
-print(merge(max_pair, word_count))
+print(text_pbe(text, 500, vocab_list))
+print("vocab", vocab_list)
                 
 
 
